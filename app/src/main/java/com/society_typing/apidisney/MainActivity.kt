@@ -73,14 +73,12 @@ class MainActivity : AppCompatActivity() {
             if (myResponse.isSuccessful) {
                 val response: DisneyDataResponse? = myResponse.body()
                 if (response != null) {
-                    Log.i("dani", response.toString())
+
                     runOnUiThread {
                         adapter.updateList(response.result)
                         binding.progressBar.isVisible = false
                     }
                 }
-            } else {
-                Log.i("dani", "no funciono")
             }
         }
     }

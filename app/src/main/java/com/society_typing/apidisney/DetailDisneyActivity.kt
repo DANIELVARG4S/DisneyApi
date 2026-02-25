@@ -41,7 +41,6 @@ class DetailDisneyActivity : AppCompatActivity() {
         } else {
             Log.i("no encontro valor de ", "${characterId}")
         }
-        //getDisneyInformation(id.toInt())
     }
 
     private fun getDisneyInformation(characterId: Int) {
@@ -49,17 +48,14 @@ class DetailDisneyActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val disneyDetail= getRetrofit().create(ApiService::class.java).getDisneyDetail(characterId)
                if (disneyDetail.body() != null){
-                   Log.i("DisneyInformation ", "${disneyDetail}")
                     runOnUiThread { createUI(disneyDetail.body()!!) }
                }
         }
     }
     //TODO
     private fun createUI(disney: DisneyDetailResponse){
-        //Log.i("createUI ", "${disney}")
-        Picasso.get().load(disney.imageUrl).into(binding.ivDisney)
-        binding.tvDisneyName.text = disney.name
-
+        Picasso.get().load(disney.data.imageUrl).into(binding.ivDisney)
+        binding.tvDisneyName.text = disney.data.name
     }
 
     //LLAMADA A RETROFIT
